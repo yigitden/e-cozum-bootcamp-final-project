@@ -10,7 +10,8 @@ const AllList = () => {
         my:4,
         p:2,
         display:'flex', 
-        alignItems:'flex-start'
+        alignItems:'flex-start',
+        whiteSpace: 'nowrap'
     }}>
         <List/>
         <AddListButton/>

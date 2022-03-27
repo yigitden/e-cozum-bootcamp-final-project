@@ -18,7 +18,7 @@ const CardItem = ({ listId,  list }) => {
   const cardarr   = useAppSelector(state => state.card.data)
   const cardsAll = Object.keys(cardarr).map( key => cardarr[key])
   const card = cardsAll.filter((item)=> item.listId == listId)
-  console.log(card)
+
       
   return (
 

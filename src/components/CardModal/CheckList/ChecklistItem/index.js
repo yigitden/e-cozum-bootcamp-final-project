@@ -9,8 +9,7 @@ import { addChecklistItems, getAllCard } from '../../../../features/CardSlice';
 
 const ChecklistItem = ({checklist}) => {
 
-  const [itemName, setItemName] = useState('')
- console.log(checklist.items.length)
+  const [itemName, setItemName] = useState('') 
 
   const dispatch = useAppDispatch()
   const handleCheckListItemAdd = () => {
@@ -40,10 +39,8 @@ const ChecklistItem = ({checklist}) => {
 </Box>
 
 
-
  ))}
      
-
 
       <Box sx={{ pl:5,display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 

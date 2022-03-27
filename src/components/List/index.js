@@ -29,13 +29,14 @@ const List = () => {
       
         <Paper
           sx={{
-            width: '320px',
-            maxHeight: '480px',
+            width: 320,
+            height: 460,
             backgroundColor: grey[100],
             borderRadius: 6,
             mr: 3,
             display: 'flex',
             flexDirection: 'column',
+            flexWrap:'nowrap'
 
           }}>
           <ListTitle

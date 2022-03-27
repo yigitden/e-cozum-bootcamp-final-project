@@ -1,4 +1,4 @@
-import { Box,Avatar } from '@mui/material'
+import { Box,Avatar, Typography } from '@mui/material'
 import React from 'react'
 import { grey,blue} from '@mui/material/colors'
 
@@ -30,7 +30,7 @@ src="/broken-image.jpg" />
           width:'100%'
 
         }}>
-          {comment.message}
+         <Typography>{comment.message}</Typography> 
         </Box>
 
         </Box>

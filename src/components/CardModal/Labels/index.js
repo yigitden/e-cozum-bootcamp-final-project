@@ -12,7 +12,7 @@ const Labels = ({labels}) => {
 
   
   return (
-    <Box >
+    <Box sx={{p:3}} >
        <Box sx={{
            display:'flex',mt:13 }}>
                <LabelOutlinedIcon/> 

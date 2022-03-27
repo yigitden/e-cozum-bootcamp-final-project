@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Divider from '@mui/material/Divider';
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, Typography, TextField,InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import ButtonRadius from '../ButtonRadius'; 
 import { useAppDispatch } from '../../store';
@@ -9,6 +9,7 @@ import {  getListAll  } from '../../features/ListSlice';
 import { useParams } from 'react-router-dom';
 import { addCard } from '../../features/CardSlice'; 
 
+import ClearIcon from '@mui/icons-material/Clear';
 
 const CardFooter = ({listId}) => {
     const { id } = useParams()
@@ -61,7 +62,8 @@ useEffect(()=>{
                         mx:'auto',
                         display:'flex',
                         justifyContent:'center',
-                        alignItems:'center'
+                        alignItems:'center',
+                        p:1
                     }}>
                     <TextField
                         size="small"
@@ -72,6 +74,14 @@ useEffect(()=>{
                         label="Required"
                         defaultValue=""
                         onChange={(event) => setName(event.target.value)}
+                        InputProps={{
+                            endAdornment:
+                              <InputAdornment position='end'>
+                                <ClearIcon
+                                  onClick={() => setStatusButton(false)} />
+              
+                              </InputAdornment>
+                          }}
                     />
                     <ButtonRadius 
                     text='ADD'

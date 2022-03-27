@@ -7,7 +7,7 @@ const CardName = ({list}) => {
 
   
   return (
-    <Box sx={{display:'flex', my:3}}>
+    <Box sx={{display:'flex', my:3,p:3}}>
     <Typography  >  {list.board.title}</Typography>
     <NavigateNextIcon/>
     <Typography>   {list.title}  </Typography>
