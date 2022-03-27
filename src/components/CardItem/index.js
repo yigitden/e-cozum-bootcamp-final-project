@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { getAllCard } from '../../features/CardSlice'; 
 
 const CardItem = ({ listId,  list }) => {
+ 
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getAllCard())
@@ -17,7 +18,7 @@ const CardItem = ({ listId,  list }) => {
   const cardarr   = useAppSelector(state => state.card.data)
   const cardsAll = Object.keys(cardarr).map( key => cardarr[key])
   const card = cardsAll.filter((item)=> item.listId == listId)
-
+  console.log(card)
       
   return (
 
@@ -57,7 +58,7 @@ const CardItem = ({ listId,  list }) => {
 
               }}>
 
-                <CardItemComment   />
+                <CardItemComment   card={card}/>
  
               </Box>
 

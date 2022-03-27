@@ -38,13 +38,13 @@ console.log(typeof(check))
         <>
             {check && check.map((i) => (
                 <>
-                <Box sx={{ display: 'flex', mt: 13, alignItems: 'center' }}>
-                    <Box sx={{ display: 'flex' }}>
-                        <CheckBoxOutlinedIcon />
-                        <Typography> {i.title} - {i.id} </Typography>
+                <Box sx={{ display: 'flex', mt: 13,mb:5, alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex',flexGrow: 1  }}>
+                        <CheckBoxOutlinedIcon sx={{mr:1}}/>
+                        <Typography> {i.title}</Typography>
                     </Box>
 
-                    <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex'    }}>
 
 
                         <MoreVertIcon
@@ -79,7 +79,7 @@ console.log(typeof(check))
  
                 </Box>
 <Box>
-     <ChecklistItem/>
+     <ChecklistItem checklist={i}/>
 </Box>
 
 </>

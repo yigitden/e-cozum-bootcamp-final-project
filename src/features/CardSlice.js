@@ -46,7 +46,10 @@ export const addComments = createAsyncThunk("addComments", async (data) => {
     return response.data
 })
 
-
+export const addChecklistItems = createAsyncThunk("addChecklistItems", async (data) => {
+    const response = await Api.post(`checklist-item`, data);
+    return response.data
+})
 
 const CardSlice = createSlice({
     name: "CardSlice",
@@ -120,7 +123,7 @@ const CardSlice = createSlice({
         },
         [deleteCheckList.fulfilled]: (state, action) => {
             state.loading = false;
-            state.data = state.data.filter((item) => item.id !== action.payload)
+            state.data = state.data.checklists.filter((item) => item.id !== action.payload)
         },
         [deleteCheckList.rejected]: (state, action) => {
             state.loading = false;
@@ -139,7 +142,19 @@ const CardSlice = createSlice({
             state.loading = false;
             state.error = "Error fetching data";
         },
+        [addChecklistItems.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [addChecklistItems.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = { ...state.data, checklists: {items: action.payload} }
 
+        },
+        [addChecklistItems.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
 
 
     }

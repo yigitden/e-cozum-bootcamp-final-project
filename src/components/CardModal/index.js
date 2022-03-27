@@ -9,9 +9,10 @@ import { TextField } from '@mui/material';
 import Labels from './Labels';
 import CheckList from './CheckList';
 import { useAppDispatch } from '../../store';
-import { getAllCard } from '../../features/CardSlice';
+
 import Comment from '../Comment';
 import Activity from '../Comment/Activity';
+import { getAllCard } from '../../features/CardSlice';
  
 
 
@@ -33,9 +34,8 @@ const CardModal = ({ card,list }) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);  
-    const handleClose = () => setOpen(false);
-  
- 
+    const handleClose = () => setOpen(false); 
+   
     return (
         <>
             <div>
@@ -87,7 +87,7 @@ const CardModal = ({ card,list }) => {
 </Box>
 
 
-{(!card.labels) ? <></> :   <Labels labels={card.labels}/>}
+{(!card.labels ) ? <></> :   <Labels labels={card.labels}/>}
 
 {(!card.checklists) ? <></> :   <CheckList check={card.checklists}/>}   
 
