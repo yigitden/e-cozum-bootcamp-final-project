@@ -10,10 +10,12 @@ import Labels from './Labels';
 import CheckList from './CheckList';
 import Comment from '../Comment';
 import Activity from '../Comment/Activity';
+import { getAllCard } from '../../features/CardSlice';
+import { useAppDispatch } from '../../store';
 
 
 const CardModal = ({ card, list }) => {
-
+    const dispatch = useAppDispatch()
     const style = {
         position: 'absolute',
         top: '50%',
@@ -30,7 +32,10 @@ const CardModal = ({ card, list }) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false)
+        dispatch(getAllCard())
+    }
 
     return (
         <>

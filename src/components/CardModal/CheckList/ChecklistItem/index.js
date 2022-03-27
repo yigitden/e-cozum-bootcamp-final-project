@@ -4,7 +4,9 @@ import { Box, Button, Checkbox, TextField } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAppDispatch } from '../../../../store';
 import { addChecklistItems, getAllCard } from '../../../../features/CardSlice';
- 
+import { Api } from '../../../../service/Api';
+import CheckBoxItem from './CheckBoxItem';
+
 
 
 const ChecklistItem = ({checklist}) => {
@@ -22,17 +24,35 @@ const ChecklistItem = ({checklist}) => {
 
     dispatch(addChecklistItems(newCheckListItem))
     dispatch(getAllCard())
-
     setItemName('')
   }
+const handleCheckListItemEdit = (value,id) => {
 
+  const checkListItemEdit = {
+    "title": value, 
+  } 
+  Api.put(`checklist-item/${id}`,checkListItemEdit)
+  .then(() =>  dispatch(getAllCard()) )
+  
+}
+
+
+
+  
   return (
     <>
  {checklist.items && checklist.items.map((item)=>(
  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 2 }}>
- <Checkbox />   
- <TextField fullWidth id="outlined-basic"  variant="outlined" value={item.title} /> 
-  {item.length}
+ <CheckBoxItem 
+ id={item.id}
+ isChecked={item.isChecked}
+ />
+ <TextField 
+ fullWidth id="outlined-basic" 
+  variant="outlined" 
+  defaultValue={item.title} 
+  onChange={(event) => handleCheckListItemEdit(event.currentTarget.value,item.id)}/> 
+ 
   <Button><DeleteOutlineOutlinedIcon /></Button>
 
 

@@ -10,10 +10,10 @@ const CheckList = ({ check }) => {
     return (
 
         <Box sx={{ p: 3 }}>
-            {check && check.map((i) => (
+            {check && check.map((item) => (
                 <>
-                    <CheckListTitle checkList={i} />
-                    <ChecklistItem checklist={i} />
+                    <CheckListTitle checkList={item} />
+                    <ChecklistItem checklist={item} />
                 </>
             ))}
 

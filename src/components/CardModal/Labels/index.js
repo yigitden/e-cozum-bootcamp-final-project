@@ -24,6 +24,7 @@ const Labels = ({labels}) => {
 
     <Label
     text={label.title}  
+    id={label.id}  
     />
   ))}
                  
