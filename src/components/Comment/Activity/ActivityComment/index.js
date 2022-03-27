@@ -14,10 +14,18 @@ const ActivityComment = ({ comments }) => {
   display:'flex',
   mb:2
 }}> 
-<Box>   <Avatar
-sx={{ bgcolor: blue[400], mr:3 }}
+<Box sx={{
+  display:'flex',
+  alignItems:'center',
+  flexDirection:'column',
+  justifyContent:'center',
+  mr:3 
+}}>  
+   <Avatar
+sx={{ bgcolor: blue[400]}}
 alt={comment.author.username}
 src="/broken-image.jpg" />
+<Typography>{comment.author.username}</Typography>
   </Box>
         <Box sx={{
           border: 1,

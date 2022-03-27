@@ -25,6 +25,7 @@ const CardModal = ({ card, list }) => {
         border: '1px solid #000',
         boxShadow: 24,
         overflow: 'auto',
+        borderRadius:6
     };
 
     const [open, setOpen] = useState(false);
