@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Box, Button, Checkbox, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAppDispatch } from '../../../../store';
-import { addChecklistItems, getAllCard } from '../../../../features/CardSlice';
-import { Api } from '../../../../service/Api';
+import { addChecklistItems, editCheckListItemName, getAllCard } from '../../../../features/CardSlice';
+ 
 import CheckBoxItem from './CheckBoxItem';
-
-
+ 
 
 const ChecklistItem = ({checklist}) => {
 
@@ -31,9 +30,12 @@ const handleCheckListItemEdit = (value,id) => {
   const checkListItemEdit = {
     "title": value, 
   } 
-  Api.put(`checklist-item/${id}`,checkListItemEdit)
-  .then(() =>  dispatch(getAllCard()) )
   
+  dispatch(editCheckListItemName({
+    checkListItemEdit,
+    id
+  }))
+
 }
 
 

@@ -6,12 +6,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { grey } from '@mui/material/colors';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { deleteCheckList, getAllCard } from '../../../features/CardSlice';
+import { deleteCheckList, editCheckListName, getAllCard } from '../../../features/CardSlice';
 import { useAppDispatch } from '../../../store';
 import DoneIcon from '@mui/icons-material/Done';
 import { Box, Typography, TextField, InputAdornment } from '@mui/material'
 import { Api } from '../../../service/Api';
-
+ 
 
 const CheckListTitle = ({checkList}) => {
 
@@ -33,7 +33,6 @@ const CheckListTitle = ({checkList}) => {
 
     }
 
-  
     
     const handleRenameCheckList = () => {
         setInputStatus(true)
@@ -43,12 +42,18 @@ const CheckListTitle = ({checkList}) => {
     
     const [inputStatus, setInputStatus] = useState(false)
     const [checkListNameEdit, setCheckListNameEdit] = useState(`${checkList.title}`)
+    
     const handleCheckListNameEdit = (id) => {
-        const CheckListNameEditInfo = {
+        const checkListNameEditInfo = {
             "title": `${checkListNameEdit}`,
+            
         }
-        Api.put(`checklist/${id}`, CheckListNameEditInfo)
-            .then(()=>dispatch(getAllCard())) 
+        dispatch(editCheckListName({
+            checkListNameEditInfo,
+            id}))
+          
+            dispatch(getAllCard()) 
+            dispatch(getAllCard()) 
         handleClose() 
         setInputStatus(false)
     }
@@ -56,7 +61,7 @@ const CheckListTitle = ({checkList}) => {
 
 
   return (
-    <Box sx={{ display: 'flex', mt: 13, mb: 5, alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', my:3, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
         <CheckBoxOutlinedIcon sx={{ mr: 1 }} />
         {!inputStatus ?

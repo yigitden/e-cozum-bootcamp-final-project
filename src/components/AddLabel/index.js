@@ -81,7 +81,7 @@ const handleLabelDelete = () => {
             >
 
                 {labelList.map((label) => (
-                    <MenuItem>
+                    <MenuItem key={label.id} >
                     <Box sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
                     <FormControlLabel
         label={label.title}

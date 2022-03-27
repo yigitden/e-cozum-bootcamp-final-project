@@ -13,7 +13,7 @@ const ActivityComment = ({ comments }) => {
 <Box sx={{
   display:'flex',
   mb:2
-}}> 
+}} key={comment.id}> 
 <Box sx={{
   display:'flex',
   alignItems:'center',

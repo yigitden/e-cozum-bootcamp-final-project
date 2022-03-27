@@ -14,18 +14,18 @@ const Labels = ({labels}) => {
   return (
     <Box sx={{p:3}} >
        <Box sx={{
-           display:'flex',mt:13 }}>
+           display:'flex',mt:9}}>
                <LabelOutlinedIcon/> 
                <Typography>Labels</Typography>
                </Box> 
 
                <Box sx={{display:'flex', border:1,borderRadius:1,p:1,borderColor:grey[500]}}> 
   {labels && labels.map((label) =>(
-
+<Box key={label.id}>
     <Label
     text={label.title}  
-    id={label.id}  
-    />
+    
+    /></Box>
   ))}
                  
                   </Box> 
