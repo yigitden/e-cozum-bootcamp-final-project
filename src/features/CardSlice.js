@@ -52,6 +52,9 @@ export const addChecklistItems = createAsyncThunk("addChecklistItems", async (da
 })
 
 
+ 
+
+
 
 
 const CardSlice = createSlice({
@@ -151,6 +154,7 @@ const CardSlice = createSlice({
         },
         [addChecklistItems.fulfilled]: (state, action) => {
             state.loading = false;
+ 
             state.data = { ...state.data, checklists: {items: action.payload} }
 
         },
@@ -158,6 +162,7 @@ const CardSlice = createSlice({
             state.loading = false;
             state.error = "Error fetching data";
         },
+ 
  
 
     }

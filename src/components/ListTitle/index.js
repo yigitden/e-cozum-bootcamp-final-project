@@ -8,10 +8,11 @@ import { grey } from '@mui/material/colors';
 import { useState } from 'react'; 
 import { useAppDispatch} from '../../store';
 import { useParams } from 'react-router-dom';
-import { deleteLists, getListAll } from '../../features/ListSlice';
+import { deleteLists, editListTitle, getListAll } from '../../features/ListSlice';
 import { Typography, Box, TextField, InputAdornment } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import { Api } from '../../service/Api';
+ 
  
 const ListTitle = ({ listTitle, listId }) => {
   const { id } = useParams()
@@ -39,13 +40,18 @@ const ListTitle = ({ listTitle, listId }) => {
  
   const handleEditList = () => {
 
+    
+
     const updatedListInfo = {
       "title": `${listNameEdit}`,
       "boardId": Number(id)
     } 
-    Api.put(`list/${listId}`,updatedListInfo)
-    .then()
-    dispatch(getListAll(id))
+    
+    dispatch(editListTitle({
+      listId,
+      updatedListInfo
+    }))
+     
     handleClose()
     setStatusTitle(false)
   }

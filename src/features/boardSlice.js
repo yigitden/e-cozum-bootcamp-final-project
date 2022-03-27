@@ -19,6 +19,10 @@ export const addBoard = createAsyncThunk("addBoard", async (data) => {
     const response = await Api.post("board",data);
     return response.data
 })
+export const editBoard = createAsyncThunk("editBoard", async (data) => {
+    const response = await Api.put(`board/${data.id}`,data.sendNewName);
+    return response.data
+})
  
 
 
@@ -53,7 +57,24 @@ const boardSlice = createSlice({
         state.loading = false;
         state.error = "Error fetching data";
          },
-     
+        //edit board to board list extraReducers
+        [editBoard.pending] : (state,action) => {
+            state.loading = true;
+            state.error = "";
+             },
+        [editBoard.fulfilled] : (state,action) => {
+            state.loading = false;
+            state.boards = state.boards.map((item) => { 
+                if(item.id === action.payload.id){
+                    return action.payload
+                }
+                return item
+            })     
+              },
+        [editBoard.rejected] : (state,action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+             }, 
 
     }
 

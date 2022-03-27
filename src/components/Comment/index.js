@@ -7,7 +7,7 @@ import CommentTitle from './CommentTitle'
 
 const Comment = ({ cardId }) => {
     return (
-        <Box sx={{ mt: 3, p: 3 }}>
+        <Box sx={{ mt: 5, p: 3 }}>
             <Box >
                 <CommentTitle />
             </Box>

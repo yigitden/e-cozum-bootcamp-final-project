@@ -103,7 +103,7 @@ const CardModal = ({ card, list }) => {
                             </Box>
 
 
-                            {(!card.labels) ? <></> : <Labels labels={card.labels} />}
+                            {(card.labels && card.labels.length !== 0) ? <Labels labels={card.labels} /> : <></>}
 
                             {(!card.checklists) ? <></> : <CheckList check={card.checklists} />}
 

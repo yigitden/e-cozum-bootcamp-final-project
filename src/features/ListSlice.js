@@ -25,7 +25,10 @@ export const deleteLists =   createAsyncThunk("deleteLists", async (id) => {
     return id
 })
 //list api end
-
+export const editListTitle = createAsyncThunk("editListTitle", async (data) => {
+    const response = await Api.put(`list/${data.listId}`, data.updatedListInfo);
+    return response.data
+})
 
 const ListSlice = createSlice({
     name: "ListSlice",
@@ -70,6 +73,24 @@ const ListSlice = createSlice({
             state.loading = false;
             state.error = "Error fetching data";
              },
+             //edit list reducers
+             [editListTitle.pending] : (state,action) => {
+                state.loading = true;
+                state.error = "";
+                 },
+            [editListTitle.fulfilled] : (state,action) => {
+                state.loading = false;
+                state.data = state.data.map((item) => { 
+                    if(item.id === action.payload.id){
+                        return action.payload
+                    }
+                    return item
+                })
+              },
+            [editListTitle.rejected] : (state,action) => {
+                state.loading = false;
+                state.error = "Error fetching data";
+                 },
    
 
     }
