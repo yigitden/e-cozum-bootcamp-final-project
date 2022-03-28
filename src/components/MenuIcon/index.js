@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../store"
 const MenuIcon = () => {
   const { id } = useParams()
     
-  const boardDetails = useAppSelector(state => state.BoardIdSlice.data)
+   
   const dispatch = useAppDispatch()
 
 
@@ -49,9 +49,9 @@ const MenuIcon = () => {
      <AddMember/>
      <Typography sx={{fontWeight:'medium',mt:2 }}>Members:</Typography>
 
-     {boardDetails.members && boardDetails.members.map((member) => (
-  <MenuItem onClick={handleClose}>{member.username}</MenuItem>
-     ))}
+      
+  <MenuItem onClick={handleClose}> </MenuItem>
+      
      </Box>
 
      </Menu>

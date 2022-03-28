@@ -11,7 +11,7 @@ const Editable = () => {
     const { id } = useParams()
     const dispatch = useAppDispatch()
     const boardDetails = useAppSelector(state => state.board.boards).filter((item) => item.id == id)
-
+    console.log(boardDetails)
     const [editName, setEditName] = useState(false);
     const [listName, setListName] = useState(`${boardDetails[0].title}`);
 
