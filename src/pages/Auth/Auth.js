@@ -9,6 +9,10 @@ import TabPanel from './TabPanel';
 
 
 const Auth = ({ setIsLogged }) => {
+
+
+
+  
   const theme = useTheme();
   const [value, setValue] = useState(0);
   <TabPanel />

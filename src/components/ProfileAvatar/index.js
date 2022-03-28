@@ -6,10 +6,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react'; 
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom'; 
  
-
-const ProfileAvatar = () => {
-
+const ProfileAvatar = ({handleSetIsLogged}) => {
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -24,6 +24,14 @@ const ProfileAvatar = () => {
     
     const deleteCookie = (name) => {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      }
+
+      
+      const handleLogout = () => {
+        deleteCookie("token")
+        handleSetIsLogged(false)
+        handleClose()
+        navigate("/auth")
       }
     
     return (
@@ -76,7 +84,7 @@ const ProfileAvatar = () => {
         }}
       >
  
-        <MenuItem onClick={() => deleteCookie("token")}><LogoutIcon fontSize="small" sx={{mr:1}}/>Logout</MenuItem>
+        <MenuItem onClick={() => handleLogout()}><LogoutIcon fontSize="small" sx={{mr:1}}/>Logout</MenuItem>
       </Menu>
         </Box>
 

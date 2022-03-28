@@ -1,12 +1,19 @@
 import { Typography } from '@mui/material'
+import { useEffect } from 'react'
 import BoardList from '../../components/BoardList'
 import ProfileAvatar from '../../components/ProfileAvatar'
+import { fetchBoard } from '../../features/boardSlice'
+import { useAppDispatch } from '../../store'
+
+ 
  
 
-const Boards = () => {
+const Boards = ({handleSetIsLogged}) => {
+
+  
   return (
     <>
-    <ProfileAvatar/>
+    <ProfileAvatar handleSetIsLogged={handleSetIsLogged}/>
   
     <Typography sx={{
       my:10,
