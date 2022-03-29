@@ -2,6 +2,8 @@ import React from 'react'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { Box, Menu, Button, TextField, MenuItem, FormControlLabel } from '@mui/material';
 import DueDate from '.';
+import RemoveDueDate from './RemoveDueDate';
+
 
 
 const SelectDueDate = ({card}) => {
@@ -13,10 +15,6 @@ const SelectDueDate = ({card}) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleDeleteDuedate = () => {
-
-        handleClose()
-    }
 
   return (
     <>
@@ -46,22 +44,12 @@ const SelectDueDate = ({card}) => {
         
             <MenuItem>
             <Box sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-      {(card.duedate === 'null') ? <><DueDate/></> :  <MenuItem onClick={() => handleDeleteDuedate()}>Remove Due Date</MenuItem>}
+      {(card.duedate == null ) ? <DueDate card={card}/> :  <RemoveDueDate card={card} handleClose={handleClose}/>}
       
 
-  
             </Box>
                 
             </MenuItem>
-
-
-
-
-     
-
-
-
-
 
     </Menu>
 
