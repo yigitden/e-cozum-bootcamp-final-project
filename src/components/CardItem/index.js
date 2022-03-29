@@ -2,7 +2,7 @@ import React, { useEffect }  from 'react'
 import { CardContent, Card, Box, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import CardFooter from '../CardFooter';
-
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CardItemComment from '../CardItemComment'; 
 import CardModal from '../CardModal';
 import { useAppDispatch, useAppSelector } from '../../store'; 
@@ -57,7 +57,10 @@ const CardItem = ({ listId,  list }) => {
                 alignItems: 'center'
 
               }}>
+                
 
+              {card.description && card.description ? <DescriptionOutlinedIcon sx={{fontSize:'medium',mr:22}}/> : <></>}
+             
                 <CardItemComment   card={card}/>
  
               </Box>
