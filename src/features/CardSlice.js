@@ -275,7 +275,7 @@ const CardSlice = createSlice({
         [deleteCheckListItem.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = state.data.map((item) => { 
-                if(item.checklists.items.id==action.payload){
+                if(item.checklists.items.id == action.payload){
                     return item.checklists.items = item.checklists.items.filter((i)=> i.id !== action.payload)
                 }
                 return item
@@ -345,24 +345,7 @@ const CardSlice = createSlice({
             state.error = "Error fetching data";
         },
 
-        [deleteLabel.pending]: (state, action) => {
-            state.loading = true;
-            state.error = "";
-        },
-        [deleteLabel.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.data = state.data.map((item) => { 
-                if(item.labels.id==action.payload){
-                    return item.labels = item.labels.filter((i)=> i.id !== action.payload)
-                }
-                return item
-                
-            })
-        },
-        [deleteLabel.rejected]: (state, action) => {
-            state.loading = false;
-            state.error = "Error fetching data";
-        },
+ 
 
 
 
