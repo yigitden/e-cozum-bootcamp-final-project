@@ -1,7 +1,6 @@
 
-import { Box, Menu, Button, TextField, MenuItem } from '@mui/material';
+import { Box} from '@mui/material';
 import React from 'react'
-
 import { grey } from '@mui/material/colors';
 import RemoveCard from '../../RemoveCard';
 import AddCheckList from '../../AddCheckList';
@@ -19,7 +18,7 @@ const Header = ({ handleClose, cardId,card }) => {
         alignItems: 'center',
         height: '5px',
         backgroundColor: grey[800],
-        p: 3
+        p: 3, 
       }}>
         <SelectDueDate card={card} />
 
@@ -31,13 +30,14 @@ const Header = ({ handleClose, cardId,card }) => {
           cardId={cardId}
           closeModal={handleClose}
         />
-
+        <Box sx={{ width: '100%' }}>
         <CloseIcon sx={{
           color: 'white',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          ml:70 
         }}
           onClick={() => handleClose()} />
-
+        </Box>
 
 
       </Box>

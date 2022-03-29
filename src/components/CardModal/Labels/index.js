@@ -1,34 +1,45 @@
-import { Box,TextField, Typography,Chip  } from '@mui/material'
+import { Box, TextField, Typography, Chip } from '@mui/material'
 import React from 'react'
 import Label from '../../Label'
 import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
+import { deleteLabel, getAllCard } from '../../../features/CardSlice';
+import { useAppDispatch } from '../../../store';
+import { Api } from '../../../service/Api';
 
 
 
 
-const Labels = ({labels}) => {
+const Labels = ({ card }) => {
+  const dispatch = useAppDispatch()
 
-  
+  const onDelete = () => {
+    Api
+       .delete()
+    dispatch(getAllCard())
+  }
+ 
+
   return (
-    <Box sx={{p:3}} >
-       <Box sx={{
-           display:'flex',mt:9}}>
-               <LabelOutlinedIcon/> 
-               <Typography>Labels</Typography>
-               </Box> 
+    <Box sx={{ p: 3 }} >
+      <Box sx={{
+        display: 'flex'
+      }}>
+        <LabelOutlinedIcon />
+        <Typography>Labels</Typography>
+      </Box>
 
-               <Box sx={{display:'flex', border:1,borderRadius:1,p:1,borderColor:grey[500]}}> 
-  {labels && labels.map((label) =>(
-<Box key={label.id}>
-    <Label
-    text={label.title}  
-    
-    /></Box>
-  ))}
-                 
-                  </Box> 
+      <Box sx={{ display: 'flex', border: 1, borderRadius: 1, p: 1, borderColor: grey[500] }}>
+        {card.labels && card.labels.map((label) => (
+          <Box key={label.id}>
+            <Label
+              text={label.title}
+              onDelete={onDelete}
+            /></Box>
+        ))}
+
+      </Box>
     </Box>
   )
 }

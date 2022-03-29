@@ -4,11 +4,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem'; 
 import { useAppDispatch } from '../../store';
 import { useParams } from 'react-router-dom';
-import { deleteCard } from '../../features/CardSlice';
+import { deleteCard, getAllCard } from '../../features/CardSlice';
+
 
 const RemoveCard = ({cardId, closeModal}) => {
     
-    const { id } = useParams()
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -22,6 +23,7 @@ const RemoveCard = ({cardId, closeModal}) => {
     
     const handleDeleteCard = () => {
          dispatch(deleteCard(cardId))
+         dispatch(getAllCard())
         closeModal()
     }
 

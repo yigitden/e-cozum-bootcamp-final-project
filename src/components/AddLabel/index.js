@@ -10,6 +10,7 @@ import { addLabel, getAllCard } from '../../features/CardSlice';
 
 
 const AddLabel = ({cardId}) => {
+    const [checkhedStatus,setCheckedStatus] = useState(false)
     const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -32,7 +33,7 @@ const AddLabel = ({cardId}) => {
     }, [])
  
 const handleLabelChange = (event) => {
-    {(event.target.checked == true) ? handleLabelAdd(event.target.id) : handleLabelDelete() }
+    {(event.target.checked == true) ? handleLabelAdd(event.target.id) : handleLabelDelete(event.target.id) }
 }
 
 const handleLabelAdd = (id) => {
@@ -44,11 +45,14 @@ const handleLabelAdd = (id) => {
 
   dispatch(addLabel(newLabel))
   dispatch(getAllCard())
-
+  setCheckedStatus(true)
 }
 
-const handleLabelDelete = () => {
-
+const handleLabelDelete = (id) => {
+    Api
+    .delete(`card-label/${id}`)
+    .then(()=>dispatch(getAllCard()))
+    .catch(err => console.log(err))
 
 }
 
