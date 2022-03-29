@@ -27,11 +27,21 @@ export const deleteCard = createAsyncThunk("deleteCard", async (id) => {
     return id
 })
 
+export const updateCard = createAsyncThunk("updateCard", async (data) => {
+    const response = await Api.put(`card/${data.cardId}`, data.cardUpdateObject);
+    return response.data
+})
+
+
 // label createAsyncThunk
 
 export const addLabel = createAsyncThunk("addLabel", async (data) => {
     const response = await Api.post(`card-label`, data);
     return response.data
+})
+export const deleteLabel = createAsyncThunk("deleteLabel", async (id) => {
+    const response = await Api.delete(`card-label/${id}`);
+    return id
 })
 
 // checklists createAsyncThunk
@@ -74,8 +84,19 @@ export const editCheckListItemCheckStatus = createAsyncThunk("editCheckListItemC
     return response.data
 })
  
-
-
+export const deleteCheckListItem = createAsyncThunk("deleteCheckListItem", async (id) => {
+    const response = await Api.delete(`checklist-item/${id}`);
+    return id
+})
+// duedate createAsyncThunk
+export const addDueDate = createAsyncThunk("addDueDate", async (data) => {
+    const response = await Api.put(`card/${data.cardId}`, data.selectedDueDate);
+    return response.data
+})
+export const deleteDueDate = createAsyncThunk("deleteDueDate", async (data) => {
+    const response = await Api.put(`card/${data.cardId}`, data.selectedDueDate);
+    return response.data
+})
 
 
 const CardSlice = createSlice({
@@ -150,7 +171,13 @@ const CardSlice = createSlice({
         },
         [deleteCheckList.fulfilled]: (state, action) => {
             state.loading = false;
-            state.data = state.data.checklists.filter((item) => item.id !== action.payload)
+            state.data = state.data.map((item) => { 
+                if(item.checklists.id==action.payload){
+                    return item.checklists = item.checklists.filter((i)=> i.id !== action.payload)
+                }
+                return item
+                
+            })
         },
         [deleteCheckList.rejected]: (state, action) => {
             state.loading = false;
@@ -235,17 +262,117 @@ const CardSlice = createSlice({
                 }
                 return item
             })
-            
 
         },
         [editCheckListItemCheckStatus.rejected]: (state, action) => {
             state.loading = false;
             state.error = "Error fetching data";
         },
+        [deleteCheckListItem.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [deleteCheckListItem.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = state.data.map((item) => { 
+                if(item.checklists.items.id==action.payload){
+                    return item.checklists.items = item.checklists.items.filter((i)=> i.id !== action.payload)
+                }
+                return item
+                
+            })
+        },
+        [deleteCheckListItem.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
+        [addDueDate.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [addDueDate.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = state.data.map((item) => { 
+                if(item.id === action.payload.id){
+                    return item=action.payload;
+                }
+                return item
+            })
+            
+
+        },
+        [addDueDate.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
+
+        [deleteDueDate.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [deleteDueDate.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = state.data.map((item) => { 
+                if(item.id === action.payload.id){
+                    return item=action.payload;
+                }
+                return item
+            })
+            
+
+        },
+        [deleteDueDate.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
+        [updateCard.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [updateCard.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = state.data.map((item) => { 
+                if(item.id === action.payload.id){
+                    return action.payload
+                }
+                return item
+            })
+            
+
+        },
+        [updateCard.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
+
+        [deleteLabel.pending]: (state, action) => {
+            state.loading = true;
+            state.error = "";
+        },
+        [deleteLabel.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = state.data.map((item) => { 
+                if(item.labels.id==action.payload){
+                    return item.labels = item.labels.filter((i)=> i.id !== action.payload)
+                }
+                return item
+                
+            })
+        },
+        [deleteLabel.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+        },
+
+
+
+
+
+
 
     }
 
-
+    
     
 })
 export default CardSlice.reducer;
