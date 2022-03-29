@@ -1,40 +1,65 @@
 import React from 'react'
-import { Typography, TextField, InputAdornment } from '@mui/material';
+import { Typography, TextField, InputAdornment,Box, Button } from '@mui/material';
 import { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import { useAppDispatch, useAppSelector } from "../../store"
-import { useParams } from 'react-router-dom'
-import { editBoard, fetchBoard } from '../../features/boardSlice';
+import { useNavigate, useParams } from 'react-router-dom'
+import { deleteBoard, editBoard, fetchBoard } from '../../features/boardSlice';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import {  grey } from '@mui/material/colors';
+ 
+
 
 const Editable = () => {
 
     const { id } = useParams()
     const dispatch = useAppDispatch()
     const boardDetails = useAppSelector(state => state.board.boards).filter((item) => item.id == id)
-    console.log(boardDetails)
+    const navigate = useNavigate()
     const [editName, setEditName] = useState(false);
-    const [listName, setListName] = useState(`${boardDetails[0].title}`);
+    const [enteredBoardName, setEnteredBoardName] = useState(`${boardDetails[0].title}`);
 
     const handleEditBoardName = () => {
-        const sendNewName = { title: `${listName}` }
+        const sendNewName = { title: `${enteredBoardName}` }
         dispatch(editBoard({
             id,
             sendNewName
         }))
         setEditName(false)
     }
-
+    
+    const handleDeleteBoard = () => {
+        dispatch(deleteBoard(id))
+        dispatch(fetchBoard())
+        navigate('/')
+    }
 
 
 
     return (
         <>
             {(!editName) ? (
-
-                <Typography sx={{ color: 'white', fontSize: '20px', cursor: 'pointer' }} variant="h3" onClick={() => setEditName(true)}>
-                    {listName}
+<Box sx={{
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-around'
+}}>
+                <Typography sx={{ color: 'white', fontSize: '20px', cursor: 'pointer',mr:1 }} variant="h3" onClick={() => setEditName(true)}>
+                    {enteredBoardName}
                 </Typography>
-
+                <DeleteOutlineOutlinedIcon onClick={() => handleDeleteBoard()}
+                 
+                 sx={{
+                    borderRadius: 8,
+                    padding: 1,
+                    transition: '0.5s',
+                    color:grey[500],
+                    '&:hover': {
+                        cursor:'pointer',
+                        backgroundColor: grey[100],
+                    }
+                }}/> 
+               </Box>
             ) : (
 
 
@@ -46,8 +71,8 @@ const Editable = () => {
 
                     }}
                     required
-                    defaultValue={listName}
-                    onChange={(e) => setListName(e.target.value)}
+                    defaultValue={enteredBoardName}
+                    onChange={(e) => setEnteredBoardName(e.target.value)}
                     InputProps={{
                         endAdornment:
                             <InputAdornment position='end'>

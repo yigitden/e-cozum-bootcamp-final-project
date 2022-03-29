@@ -9,7 +9,6 @@ const initialState = {
 
 }
 
-
 export const fetchBoard = createAsyncThunk("fetchBoard", async () => {
     const response = await Api.get("board");
     return response.data
@@ -22,6 +21,10 @@ export const addBoard = createAsyncThunk("addBoard", async (data) => {
 export const editBoard = createAsyncThunk("editBoard", async (data) => {
     const response = await Api.put(`board/${data.id}`,data.sendNewName);
     return response.data
+})
+export const deleteBoard = createAsyncThunk("deleteBoard", async (id) => {
+    const response = await Api.delete(`board/${id}`);
+    return id
 })
  
 
@@ -38,7 +41,7 @@ const boardSlice = createSlice({
         },
         [fetchBoard.fulfilled] : (state,action) => {
             state.loading = false;
-            state.boards = action.payload;
+            state.boards = action.payload
         },
         [fetchBoard.rejected] : (state,action) => {
             state.loading = false;
@@ -72,6 +75,19 @@ const boardSlice = createSlice({
             })     
               },
         [editBoard.rejected] : (state,action) => {
+            state.loading = false;
+            state.error = "Error fetching data";
+             }, 
+                     //delete board to board list extraReducers
+        [deleteBoard.pending] : (state,action) => {
+            state.loading = true;
+            state.error = "";
+             },
+        [deleteBoard.fulfilled] : (state,action) => {
+            state.loading = false;
+            state.boards = state.boards.filter((item) => item.id !== action.payload)
+              },
+        [deleteBoard.rejected] : (state,action) => {
             state.loading = false;
             state.error = "Error fetching data";
              }, 
