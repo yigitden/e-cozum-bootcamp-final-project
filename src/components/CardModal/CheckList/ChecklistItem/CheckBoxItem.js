@@ -4,7 +4,7 @@ import { Api } from '../../../../service/Api';
 import { useAppDispatch } from '../../../../store';
 import { editCheckListItemCheckStatus, getAllCard } from '../../../../features/CardSlice';
 
-const CheckBoxItem = ({id,isChecked}) => {
+const CheckBoxItem = ({id,isChecked,totalChecklistItem}) => {
 
 const [checked, setChecked] =  useState(isChecked)
 const dispatch = useAppDispatch()
@@ -15,12 +15,13 @@ const handleChangeCheckBox = (checked) => {
     "isChecked":checked
   } 
 
-  dispatch(editCheckListItemCheckStatus({
-    checkBoxEdit,
-    id
-  }))
-  
-  setChecked(checked); 
+  Api
+  .put(`checklist-item/${id}`,checkBoxEdit)
+  .then(() => dispatch(getAllCard()))  
+  totalChecklistItem()
+  setChecked(checked)
+  dispatch(getAllCard())
+ 
 }
 
   return (

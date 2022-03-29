@@ -33,7 +33,10 @@ const CheckListTitle = ({checkList}) => {
 
     }
 
-    
+    useEffect(() => {
+        dispatch(getAllCard())  
+    },[dispatch])
+
     const handleRenameCheckList = () => {
         setInputStatus(true)
         handleClose()
@@ -51,9 +54,8 @@ const CheckListTitle = ({checkList}) => {
         dispatch(editCheckListName({
             checkListNameEditInfo,
             id}))
-          
-            dispatch(getAllCard()) 
-            dispatch(getAllCard()) 
+            dispatch(getAllCard())  
+            dispatch(getAllCard())
         handleClose() 
         setInputStatus(false)
     }
@@ -117,8 +119,8 @@ const CheckListTitle = ({checkList}) => {
         'aria-labelledby': 'basic-button',
     }}
 >
-    <MenuItem id={checkList.id} onClick={(e) => handleDeleteCheckList(e.target.id)}><DeleteOutlineIcon sx={{ mr: 1 }} />Remove List</MenuItem>
-    <MenuItem onClick={() => handleRenameCheckList()} ><EditOutlinedIcon sx={{ mr: 1 }} />Rename List</MenuItem>
+    <MenuItem id={checkList.id} onClick={(e) => handleDeleteCheckList(e.target.id)}><DeleteOutlineIcon sx={{ mr: 1 }} />Remove CheckList</MenuItem>
+    <MenuItem onClick={() => handleRenameCheckList()} ><EditOutlinedIcon sx={{ mr: 1 }} />Rename CheckList</MenuItem>
 
 </Menu>
 </Box>

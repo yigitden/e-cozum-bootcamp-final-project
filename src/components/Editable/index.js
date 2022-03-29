@@ -15,7 +15,7 @@ const Editable = () => {
     const { id } = useParams()
     const dispatch = useAppDispatch()
     const boardDetails = useAppSelector(state => state.board.boards).filter((item) => item.id == id)
-    const navigate = useNavigate()
+ 
     const [editName, setEditName] = useState(false);
     const [enteredBoardName, setEnteredBoardName] = useState(`${boardDetails[0].title}`);
 
@@ -28,11 +28,7 @@ const Editable = () => {
         setEditName(false)
     }
     
-    const handleDeleteBoard = () => {
-        dispatch(deleteBoard(id))
-        dispatch(fetchBoard())
-        navigate('/')
-    }
+
 
 
 
@@ -47,18 +43,7 @@ const Editable = () => {
                 <Typography sx={{ color: 'white', fontSize: '20px', cursor: 'pointer',mr:1 }} variant="h3" onClick={() => setEditName(true)}>
                     {enteredBoardName}
                 </Typography>
-                <DeleteOutlineOutlinedIcon onClick={() => handleDeleteBoard()}
-                 
-                 sx={{
-                    borderRadius: 8,
-                    padding: 1,
-                    transition: '0.5s',
-                    color:grey[500],
-                    '&:hover': {
-                        cursor:'pointer',
-                        backgroundColor: grey[100],
-                    }
-                }}/> 
+                
                </Box>
             ) : (
 

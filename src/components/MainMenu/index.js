@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import { grey } from '@mui/material/colors';
 import ChipLink from '../Chip';
 import Editable from '../Editable';
-import MenuIcon from '../MenuIcon';
+
 import { Link } from 'react-router-dom';
+import DrawerMenu from '../DrawerMenu';
 
 const MainMenu = () => {
     
@@ -24,11 +25,10 @@ const MainMenu = () => {
             <ChipLink
                 text='Boards'
                 />
-</Link>
-                <Editable
+            </Link>
+            <Editable
                 />
-                <MenuIcon
-                />
+            <DrawerMenu />
 
 
         </Box>
