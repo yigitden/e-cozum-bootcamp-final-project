@@ -1,5 +1,5 @@
 import React, { useEffect }  from 'react'
-import { CardContent, Card, Box, Divider } from '@mui/material';
+import { CardContent, Card, Box, Divider, Chip } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import CardFooter from '../CardFooter';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -7,6 +7,7 @@ import CardItemComment from '../CardItemComment';
 import CardModal from '../CardModal';
 import { useAppDispatch, useAppSelector } from '../../store'; 
 import { getAllCard } from '../../features/CardSlice'; 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const CardItem = ({ listId,  list }) => {
  
@@ -18,6 +19,8 @@ const CardItem = ({ listId,  list }) => {
   const cardarr   = useAppSelector(state => state.card.data)
   const cardsAll = Object.keys(cardarr).map( key => cardarr[key])
   const card = cardsAll.filter((item)=> item.listId == listId)
+
+ 
 
       
   return (
@@ -34,10 +37,13 @@ const CardItem = ({ listId,  list }) => {
             
               <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                  Labeller gelecek lis title :
-                  board title :
-                  ,3
+                  {card.labels && card.labels.map((i)=>(
 
+                    <Chip sx={{mr:1,width:35,height:8,borderRadius:10 }}
+                    
+                    color={`${i.title}` == 'Önemli' ? 'error' : 'default'}
+                    
+                  /> ))} 
                 </Typography>
                 <Typography sx={{ fontSize: 14, fontWeight: 'medium', mb: 1 }} component="div">
                   {card.title}
@@ -45,8 +51,9 @@ const CardItem = ({ listId,  list }) => {
 
                 <Typography variant="body2">
                   Tarih
-                  <br />
-                  Checklist
+                  <br /> 
+                  Checklist<Chip icon={<CheckCircleOutlineIcon sx={{ mr:1 }} />} color="default" label="With Icon" />
+
                 </Typography>
               </CardContent>
               <Divider />
