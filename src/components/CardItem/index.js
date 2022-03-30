@@ -29,7 +29,7 @@ const CardItem = ({ listId, list }) => {
         {card &&
           card.map((card, index) => (
             <>
-              <Draggable draggableId={card.title} key={card.id} index={index}>
+              <Draggable draggableId={"draggable"+card.title} key={card.id} index={index}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
