@@ -6,7 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
 import { deleteLabel, getAllCard } from '../../../features/CardSlice';
 import { useAppDispatch } from '../../../store';
-import { Api } from '../../../service/Api';
+import Api  from '../../../service/Api';
 
 
 
@@ -15,7 +15,7 @@ const Labels = ({ card }) => {
   const dispatch = useAppDispatch()
 
   const onDelete = () => {
-    Api
+    Api()
        .delete()
     dispatch(getAllCard())
   }
