@@ -1,115 +1,96 @@
-import { Box, Typography, TextField, InputAdornment } from '@mui/material';
-import { grey,red } from '@mui/material/colors';
-import AddBoxIcon from '@mui/icons-material/AddBox'; 
-import {useState } from 'react';
-import { Api } from '../../service/Api';
-import ClearIcon from '@mui/icons-material/Clear';
-import ButtonRadius from '../ButtonRadius';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../store';
-import { addLists } from '../../features/ListSlice';
- 
- 
+import { Box, Typography, TextField, InputAdornment } from "@mui/material";
+import { grey, red } from "@mui/material/colors";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import { useState } from "react";
+import { Api } from "../../service/Api";
+import ClearIcon from "@mui/icons-material/Clear";
+import ButtonRadius from "../ButtonRadius";
+import { useParams } from "react-router-dom";
+import { useAppDispatch } from "../../store";
+import { addLists } from "../../features/ListSlice";
 
-const AddList = () => { 
-  const { id } = useParams()
+const AddList = () => {
+  const { id } = useParams();
   const [addList, setAddList] = useState(false);
-  const [listName,setListName] = useState('');
-  const dispatch = useAppDispatch()
-
- 
+  const [listName, setListName] = useState("");
+  const dispatch = useAppDispatch();
 
   const commonStyles = {
     bgcolor: grey[100],
     border: 0,
-    width: '320px',
-    p:1.5,
-    borderRadius: '20px',
+    width: "320px",
+    p: 1.5,
+    borderRadius: "20px",
     boxShadow: 2,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transition: '0.5s',
-    '&:hover': {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    transition: "0.5s",
+    "&:hover": {
       backgroundColor: grey[200],
-      cursor: 'pointer'
-
-    }
+      cursor: "pointer",
+    },
   };
-  const newListName = { 
-    'title': `${listName}`,
-    'boardId': Number(id)
-  }
-
+  const newListName = {
+    title: `${listName}`,
+    boardId: Number(id),
+  };
 
   const handleAddList = () => {
-    if(listName == ''){
-      alert('You have to enter a list name')
-    }else{
-      dispatch(addLists(newListName))
-      setListName('')
-      setAddList(false)
+    if (listName == "") {
+      alert("You have to enter a list name");
+    } else {
+      dispatch(addLists(newListName));
+      setListName("");
+      setAddList(false);
     }
- 
-  }
-
+  };
 
   return (
-
-    <Box sx={{ ...commonStyles }} >
-
-      {(!addList) ? (
-
-        <Box 
-        onClick={() => setAddList(true)} 
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }} >
+    <Box sx={{ ...commonStyles }}>
+      {!addList ? (
+        <Box
+          onClick={() => setAddList(true)}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <AddBoxIcon sx={{ color: red[500], fontSize: 30, mr: 1 }} />
-          <Typography  >Add a new list</Typography>
+          <Typography>Add a new list</Typography>
         </Box>
-
-                    )
-        :  (
-          <Box sx={{display:'flex',flexDirection:'column',alignItems:'flex-end',justifyContent:'space-around'}}>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            justifyContent: "space-around",
+          }}
+        >
           <TextField
-          fullWidth
+            fullWidth
             required
             label="List Title"
             id="outlined-required"
             defaultValue=""
             size="small"
-            onChange={(e)=>setListName(e.target.value)}
+            onChange={(e) => setListName(e.target.value)}
             InputProps={{
-              endAdornment:
-                <InputAdornment position='end'>
-                  <ClearIcon
-                    onClick={() => setAddList(false)} />
-
+              endAdornment: (
+                <InputAdornment position="end">
+                  <ClearIcon onClick={() => setAddList(false)} />
                 </InputAdornment>
+              ),
             }}
           />
-          
-          <ButtonRadius 
-          func= {handleAddList}
-          text='Add'/>
-          </Box>
-        )
 
-
-
-
-      }
+          <ButtonRadius func={handleAddList} text="Add" />
+        </Box>
+      )}
     </Box>
+  );
+};
 
-
-
-
-
-
-  )
-}
-
-export default AddList
+export default AddList;
