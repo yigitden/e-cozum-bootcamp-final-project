@@ -34,7 +34,7 @@ const ChecklistChip = ({ checklists }) => {
         <></>
       ) : (
         <Chip
-          sx={{ mt: 2 }}
+          sx={{ mt: 2,height:25 }}
           icon={<CheckCircleOutlineIcon sx={{ mr: 1, height: 20 }} />}
           color={
             `${totalChecklistCheckedItem()}` == `${totalChecklistItem()}`

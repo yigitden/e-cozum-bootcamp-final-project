@@ -47,7 +47,12 @@ const CardModal = ({ card, list }) => {
 
   return (
     <>
-      <button onClick={handleOpen}>sadas</button>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button fullWidth onClick={handleOpen} variant="text">
+          Open Card
+        </Button>
+      </Box>
+
       <Modal
         open={open}
         onClose={handleClose}

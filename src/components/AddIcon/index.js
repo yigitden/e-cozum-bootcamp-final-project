@@ -1,14 +1,8 @@
-import React from 'react'
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import React from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const AddIcon = () => {
-  return (
-   <AddCircleIcon
-   
-   
-   
-   />
-  )
-}
+  return <AddCircleIcon />;
+};
 
-export default AddIcon
+export default AddIcon;

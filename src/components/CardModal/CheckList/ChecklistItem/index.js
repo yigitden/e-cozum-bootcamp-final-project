@@ -4,7 +4,6 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useAppDispatch } from "../../../../store";
 import {
   addChecklistItems,
-  editCheckListItemName,
   getAllCard,
 } from "../../../../features/CardSlice";
 import LinearProgress from "@mui/material/LinearProgress";

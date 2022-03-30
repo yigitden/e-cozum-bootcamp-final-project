@@ -9,8 +9,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { deleteCheckList, editCheckListName, getAllCard } from '../../../features/CardSlice';
 import { useAppDispatch } from '../../../store';
 import DoneIcon from '@mui/icons-material/Done';
-import { Box, Typography, TextField, InputAdornment } from '@mui/material'
-import { Api } from '../../../service/Api';
+import { Box, Typography, TextField, InputAdornment } from '@mui/material' 
  
 
 const CheckListTitle = ({checkList}) => {

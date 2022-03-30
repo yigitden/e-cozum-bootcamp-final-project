@@ -1,16 +1,11 @@
-import {Button} from '@mui/material';
+import { Button } from "@mui/material";
 
-const ButtonTemp = ({onClick,variant,text,size}) => {
+const ButtonTemp = ({ onClick, variant, text, size }) => {
+  return (
+    <Button onClick={onClick} variant={variant} size={size}>
+      {text}
+    </Button>
+  );
+};
 
-    return (
-                <Button 
-                onClick={onClick} 
-                variant={variant}
-                size={size}
-                >
-                    {text}
-                    </Button>
-    )
-}
-
-export default ButtonTemp
+export default ButtonTemp;
