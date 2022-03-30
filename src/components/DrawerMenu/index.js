@@ -5,19 +5,15 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {  blueGrey,grey } from '@mui/material/colors';
-import { Typography } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { deleteBoard, fetchBoard } from '../../features/boardSlice';
+import { deleteBoard, allBoardLists } from '../../features/boardSlice';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store';
 import { getAllUsers } from '../../features/UserSlice';
-import { Api } from '../../service/Api';
+import Api from '../../service/Api';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -44,7 +40,7 @@ export default function DrawerMenu() {
 
   const handleDeleteBoard = () => {       //DELETE BOARD FUNCTION
     dispatch(deleteBoard(id))
-    dispatch(fetchBoard())
+    dispatch(allBoardLists())
     navigate('/')
 }
 
@@ -69,7 +65,7 @@ const addMemberToBoard = () => {
         "boardId": Number(id),
     }
     
-    Api
+    Api()
       .post('board-member',memberDetails)
       .then(() => {
         dispatch(getBoardInfoFromId(id)) 
@@ -79,13 +75,14 @@ const addMemberToBoard = () => {
       });
   };
 //DELETE MEMBER FROM BOARD
-const deleteMemberFromBoard = (memberId) => {  
-    Api
+const deleteMemberFromBoard = (memberId) => { 
+    
+    Api()
       .delete(`board-member/${memberId}`)
       .then(() => dispatch(getBoardInfoFromId(id)))
       .catch((error) => {
         console.log(error);
-      });
+      }); 
   };
 
 
@@ -189,7 +186,7 @@ const deleteMemberFromBoard = (memberId) => {
             <PersonOutlineOutlinedIcon sx={{ mr: 3}}/>
             <ListItemText primary={member.username} />
             
-            <DeleteOutlinedIcon onClick={() => deleteMemberFromBoard(`${member.id}`)}/>
+            <DeleteOutlinedIcon onClick={() => deleteMemberFromBoard(`${Number(member.id)}`)}/>
           </ListItem>
      ))}
 

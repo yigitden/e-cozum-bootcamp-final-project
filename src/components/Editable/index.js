@@ -4,24 +4,19 @@ import {
   TextField,
   InputAdornment,
   Box,
-  Button,
 } from "@mui/material";
 import { useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  deleteBoard,
   editBoard,
-  allBoardLists,
 } from "../../features/boardSlice";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { grey } from "@mui/material/colors";
 
 const Editable = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const boardDetails = useAppSelector((state) => state.board.boards).filter(
+  const boardDetails = useAppSelector((state) => state.board.board).filter(
     (item) => item.id == id
   );
 
