@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Box, Button, TextField } from '@mui/material';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useAppDispatch } from '../../../../store';
 import { addChecklistItems, editCheckListItemName, getAllCard } from '../../../../features/CardSlice';
- 
+import LinearProgress from '@mui/material/LinearProgress';
 import CheckBoxItem from './CheckBoxItem';
+import ChecklistItemDelete from './ChecklistItemDelete';
+import { Api } from '../../../../service/Api';
  
+
 
 const ChecklistItem = ({checklist}) => {
 
@@ -23,31 +25,52 @@ const ChecklistItem = ({checklist}) => {
 
     dispatch(addChecklistItems(newCheckListItem))
     dispatch(getAllCard())
+    
     setItemName('')
   }
+
+  
 const handleCheckListItemEdit = (value,id) => {
 
   const checkListItemEdit = {
     "title": value, 
   } 
   
-  dispatch(editCheckListItemName({
-    checkListItemEdit,
-    id
-  }))
-
+  Api
+     .put(`checklist-item/${id}`,checkListItemEdit)
+     .then(() => dispatch(getAllCard())) 
+     .catch(err => console.log(err))
 }
 
 
-
+ 
+const totalChecklistItem = () => {
+  let count = 0
+  checklist.items.forEach((item) => {
+    if(item.isChecked === true) {
+      count +=1
+    }
+  });
+  return count
+}
+ 
   
   return (
     <>
+
+<Box sx={{ my:2,display:'flex',alignItems:'center',justifyContent:'flex-start' }}>
+     <Box><Typography>   {totalChecklistItem()}/{checklist.items.length} </Typography></Box> 
+     <Box> <LinearProgress fullWidth sx={{width:625,ml:2}} variant="determinate" 
+     value={totalChecklistItem() === 0 && checklist.items.length===0 ? 0 : (totalChecklistItem() / checklist.items.length) * 100} />
+     </Box> 
+    </Box>
+
  {checklist.items && checklist.items.map((item)=>(
- <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 2 }}>
+  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 2 }}>
  <CheckBoxItem 
  id={item.id}
  isChecked={item.isChecked}
+ totalChecklistItem={totalChecklistItem}
  />
  <TextField 
  fullWidth id="outlined-basic" 
@@ -55,15 +78,14 @@ const handleCheckListItemEdit = (value,id) => {
   defaultValue={item.title} 
   onChange={(event) => handleCheckListItemEdit(event.currentTarget.value,item.id)}/> 
  
-  <Button><DeleteOutlineOutlinedIcon /></Button>
 
 
+<ChecklistItemDelete    id={item.id}  />
 </Box>
 
-
  ))}
-     
-
+    
+    
       <Box sx={{ pl:5,display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
 
