@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import {Api} from "../service/Api"
+import Api from "../service/Api"
 
 
 
@@ -12,21 +12,21 @@ const initialState = {
 
 //list api start
 export const getListAll =   createAsyncThunk("getListAll", async (id) => {
-    const response = await Api.get(`list?boardId=${id}`);
+    const response = await Api().get(`list?boardId=${id}`);
     return response.data
 })
 export const addLists =   createAsyncThunk("addLists", async (data) => {
-    const response = await Api.post('list',data);
+    const response = await Api().post('list',data);
     return response.data
 })
  
 export const deleteLists =   createAsyncThunk("deleteLists", async (id) => {
-    const response = await Api.delete(`list/${id}`);
+    const response = await Api().delete(`list/${id}`);
     return id
 })
 //list api end
 export const editListTitle = createAsyncThunk("editListTitle", async (data) => {
-    const response = await Api.put(`list/${data.listId}`, data.updatedListInfo);
+    const response = await Api().put(`list/${data.listId}`, data.updatedListInfo);
     return response.data
 })
 

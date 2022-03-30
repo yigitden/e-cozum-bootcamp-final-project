@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { Api } from "../service/Api"
+import Api from "../service/Api";
+ 
 
 
 
@@ -13,22 +14,22 @@ const initialState = {
 // card createAsyncThunk
 
 export const getAllCard = createAsyncThunk("getAllCard", async () => {
-    const response = await Api.get(`card`);
+    const response = await Api().get(`card`);
     return response.data
 })
 
 export const addCard = createAsyncThunk("addCard", async (data) => {
-    const response = await Api.post(`card`, data);
+    const response = await Api().post(`card`, data);
     return response.data
 })
 
 export const deleteCard = createAsyncThunk("deleteCard", async (id) => {
-    const response = await Api.delete(`card/${id}`);
+    const response = await Api().delete(`card/${id}`);
     return id
 })
 
 export const updateCard = createAsyncThunk("updateCard", async (data) => {
-    const response = await Api.put(`card/${data.cardId}`, data.cardUpdateObject);
+    const response = await Api().put(`card/${data.cardId}`, data.cardUpdateObject);
     return response.data
 })
 
@@ -36,27 +37,27 @@ export const updateCard = createAsyncThunk("updateCard", async (data) => {
 // label createAsyncThunk
 
 export const addLabel = createAsyncThunk("addLabel", async (data) => {
-    const response = await Api.post(`card-label`, data);
+    const response = await Api().post(`card-label`, data);
     return response.data
 })
 export const deleteLabel = createAsyncThunk("deleteLabel", async (id) => {
-    const response = await Api.delete(`card-label/${id}`);
+    const response = await Api().delete(`card-label/${id}`);
     return id
 })
 
 // checklists createAsyncThunk
 
 export const addCheckLists = createAsyncThunk("addCheckList", async (data) => {
-    const response = await Api.post(`checklist`, data);
+    const response = await Api().post(`checklist`, data);
     return response.data
 })
 export const editCheckListName = createAsyncThunk("editCheckListName", async (data) => {
-    const response = await Api.put(`checklist/${data.id}`, data.checkListNameEditInfo);
+    const response = await Api().put(`checklist/${data.id}`, data.checkListNameEditInfo);
     return response.data
 })
 
 export const deleteCheckList = createAsyncThunk("deleteCheckList", async (id) => {
-    const response = await Api.delete(`checklist/${id}`);
+    const response = await Api().delete(`checklist/${id}`);
     return id
 })
 
@@ -64,7 +65,7 @@ export const deleteCheckList = createAsyncThunk("deleteCheckList", async (id) =>
 // comments createAsyncThunk
 
 export const addComments = createAsyncThunk("addComments", async (data) => {
-    const response = await Api.post(`comment`, data);
+    const response = await Api().post(`comment`, data);
     return response.data
 })
 
@@ -72,29 +73,29 @@ export const addComments = createAsyncThunk("addComments", async (data) => {
 // checklists item  createAsyncThunk
 
 export const addChecklistItems = createAsyncThunk("addChecklistItems", async (data) => {
-    const response = await Api.post(`checklist-item`, data);
+    const response = await Api().post(`checklist-item`, data);
     return response.data
 })
 export const editCheckListItemName = createAsyncThunk("editCheckListItemName", async (data) => {
-    const response = await Api.put(`checklist-item/${data.id}`, data.checkListItemEdit);
+    const response = await Api().put(`checklist-item/${data.id}`, data.checkListItemEdit);
     return response.data
 })
 export const editCheckListItemCheckStatus = createAsyncThunk("editCheckListItemCheckStatus", async (data) => {
-    const response = await Api.put(`checklist-item/${data.id}`, data.checkBoxEdit);
+    const response = await Api().put(`checklist-item/${data.id}`, data.checkBoxEdit);
     return response.data
 })
  
 export const deleteCheckListItem = createAsyncThunk("deleteCheckListItem", async (id) => {
-    const response = await Api.delete(`checklist-item/${id}`);
+    const response = await Api().delete(`checklist-item/${id}`);
     return id
 })
 // duedate createAsyncThunk
 export const addDueDate = createAsyncThunk("addDueDate", async (data) => {
-    const response = await Api.put(`card/${data.cardId}`, data.selectedDueDate);
+    const response = await Api().put(`card/${data.cardId}`, data.selectedDueDate);
     return response.data
 })
 export const deleteDueDate = createAsyncThunk("deleteDueDate", async (data) => {
-    const response = await Api.put(`card/${data.cardId}`, data.selectedDueDate);
+    const response = await Api().put(`card/${data.cardId}`, data.selectedDueDate);
     return response.data
 })
 

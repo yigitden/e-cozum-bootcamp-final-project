@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Checkbox } from '@mui/material';
-import { Api } from '../../../../service/Api';
+import  Api  from '../../../../service/Api';
 import { useAppDispatch } from '../../../../store';
 import { editCheckListItemCheckStatus, getAllCard } from '../../../../features/CardSlice';
 
@@ -15,7 +15,7 @@ const handleChangeCheckBox = (checked) => {
     "isChecked":checked
   } 
 
-  Api
+  Api()
   .put(`checklist-item/${id}`,checkBoxEdit)
   .then(() => dispatch(getAllCard()))  
   totalChecklistItem()

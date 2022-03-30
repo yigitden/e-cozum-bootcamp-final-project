@@ -1,12 +1,18 @@
 import { TextField,Box } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import Button from '../../components/Button';
+import  Api  from '../../service/Api';
+import { useAppDispatch } from '../../store';
+import { useCookies } from 'react-cookie';
+import { setIsLogged } from '../../features/AuthSlice';
 
-const Register = ({setIsLogged}) => {
+
+const Register = () => {
 
     const [registerFormData, setRegisterFormData] = useState({});
+    const [cookies, setCookie, removeCookie] = useCookies(['token', 'username']);
+    const dispatch = useAppDispatch();
 
     const handleRegisterFieldChange = (event) => {
         const name = event.currentTarget.name
@@ -15,12 +21,14 @@ const Register = ({setIsLogged}) => {
       }
     
       const handleRegister = () => {
-        axios
-          .post('http://localhost:80/auth/register', registerFormData)
+        Api()
+          .post('auth/register', registerFormData)
           .then((response) => {
-            document.cookie = `token = ${response.data.token}`
-            setIsLogged(true)
-          })
+            setCookie('token', response.data.token, { path: '/' });
+            setCookie('username', response.data.username, { path: '/' });
+            dispatch(setIsLogged(true));
+            
+          }) 
       }
 
     return(

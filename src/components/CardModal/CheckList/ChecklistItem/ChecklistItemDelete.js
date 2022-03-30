@@ -2,7 +2,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { Button } from '@mui/material'
 import React from 'react' 
 import { deleteCheckListItem, getAllCard } from '../../../../features/CardSlice';
-import { Api } from '../../../../service/Api';
+import Api  from '../../../../service/Api';
 import { useAppDispatch } from '../../../../store';
 
 const ChecklistItemDelete = ({id}) => {
@@ -10,7 +10,7 @@ const ChecklistItemDelete = ({id}) => {
  
 
     const handleDeleteChecklistItem = () => {
-     Api 
+     Api()
      .delete(`checklist-item/${id}`) 
      .then(()=>dispatch(getAllCard()))
      

@@ -10,7 +10,7 @@ import {
 import LinearProgress from "@mui/material/LinearProgress";
 import CheckBoxItem from "./CheckBoxItem";
 import ChecklistItemDelete from "./ChecklistItemDelete";
-import { Api } from "../../../../service/Api";
+import  Api  from "../../../../service/Api";
 
 const ChecklistItem = ({ checklist }) => {
   const [itemName, setItemName] = useState("");
@@ -37,7 +37,8 @@ const ChecklistItem = ({ checklist }) => {
       title: value,
     };
 
-    Api.put(`checklist-item/${id}`, checkListItemEdit)
+    Api()
+    .put(`checklist-item/${id}`, checkListItemEdit)
       .then(() => dispatch(getAllCard()))
       .catch((err) => console.log(err));
   };

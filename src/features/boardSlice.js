@@ -1,49 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import {Api} from "../service/Api"
+import Api from "../service/Api"
+
 
 
 const initialState = {
-    boards: [],
+    board: [],
     loading: false,
     error: "",
 
 }
 
-export const fetchBoard = createAsyncThunk("fetchBoard", async () => {
-    const response = await Api.get("board");
+export const allBoardLists = createAsyncThunk("allBoardLists", async () => {
+    const response = await Api().get("board");
     return response.data
 })
 
+
+
 export const addBoard = createAsyncThunk("addBoard", async (data) => {
-    const response = await Api.post("board",data);
+    const response = await Api().post("board",data);
     return response.data
 })
 export const editBoard = createAsyncThunk("editBoard", async (data) => {
-    const response = await Api.put(`board/${data.id}`,data.sendNewName);
+    const response = await Api().put(`board/${data.id}`,data.sendNewName);
     return response.data
 })
 export const deleteBoard = createAsyncThunk("deleteBoard", async (id) => {
-    const response = await Api.delete(`board/${id}`);
+    const response = await Api().delete(`board/${id}`);
     return id
 })
  
 
 
 const boardSlice = createSlice({
-    name: "boards",
+    name: "board",
     initialState,
     reducers:{},
     extraReducers:{
     //get board list extraReducers
-        [fetchBoard.pending] : (state,action) => {
+        [allBoardLists.pending] : (state,action) => {
             state.loading = true;
             state.error = "";
         },
-        [fetchBoard.fulfilled] : (state,action) => {
+        [allBoardLists.fulfilled] : (state,action) => {
             state.loading = false;
-            state.boards = action.payload
+            state.board = action.payload
         },
-        [fetchBoard.rejected] : (state,action) => {
+        [allBoardLists.rejected] : (state,action) => {
             state.loading = false;
             state.error = "Error fetching data";
         },
@@ -54,7 +57,7 @@ const boardSlice = createSlice({
          },
         [addBoard.fulfilled] : (state,action) => {
         state.loading = false;
-        state.boards.push(action.payload)      
+        state.board.push(action.payload)      
           },
          [addBoard.rejected] : (state,action) => {
         state.loading = false;
@@ -67,7 +70,7 @@ const boardSlice = createSlice({
              },
         [editBoard.fulfilled] : (state,action) => {
             state.loading = false;
-            state.boards = state.boards.map((item) => { 
+            state.board = state.board.map((item) => { 
                 if(item.id === action.payload.id){
                     return action.payload
                 }
@@ -85,7 +88,7 @@ const boardSlice = createSlice({
              },
         [deleteBoard.fulfilled] : (state,action) => {
             state.loading = false;
-            state.boards = state.boards.filter((item) => item.id !== action.payload)
+            state.board = state.board.filter((item) => item.id !== action.payload)
               },
         [deleteBoard.rejected] : (state,action) => {
             state.loading = false;

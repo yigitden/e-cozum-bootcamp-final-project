@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import {Api} from "../service/Api"
+import Api from "../service/Api"
 
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
-    const response = await Api.get("user");
+    const response = await Api().get("user");
     return response.data
 })
   

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Menu, Button, TextField, MenuItem, FormControlLabel } from '@mui/material';
  
 import Checkbox from '@mui/material/Checkbox';
-import { Api } from '../../service/Api';
+import  Api  from '../../service/Api';
  
 import { useAppDispatch } from '../../store';
 import { addLabel, getAllCard } from '../../features/CardSlice';
@@ -23,7 +23,7 @@ const AddLabel = ({cardId}) => {
     const [labelList, setLabelList] = useState([])
 
     const getAllLabel = () => {
-        Api
+        Api()
             .get('label')
             .then((data) => setLabelList(data.data))
     }
@@ -49,7 +49,7 @@ const handleLabelAdd = (id) => {
 }
 
 const handleLabelDelete = (id) => {
-    Api
+    Api()
     .delete(`card-label/${id}`)
     .then(()=>dispatch(getAllCard()))
     .catch(err => console.log(err))
