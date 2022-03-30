@@ -38,7 +38,7 @@ const AddList = () => {
 
   const handleAddList = () => {
     if (listName == "") {
-      alert("You have to enter a list name");
+      alert("You have to type a list name");
     } else {
       dispatch(addLists(newListName));
       setListName("");
