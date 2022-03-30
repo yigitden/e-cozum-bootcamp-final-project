@@ -40,11 +40,17 @@ const AddList = () => {
     'title': `${listName}`,
     'boardId': Number(id)
   }
-  const handleAddList = () => {
-     
-      dispatch(addLists(newListName))
 
+
+  const handleAddList = () => {
+    if(listName == ''){
+      alert('You have to enter a list name')
+    }else{
+      dispatch(addLists(newListName))
+      setListName('')
       setAddList(false)
+    }
+ 
   }
 
 
