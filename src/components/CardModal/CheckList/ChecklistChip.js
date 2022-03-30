@@ -28,18 +28,23 @@ const ChecklistChip = ({ checklists }) => {
     totalChecklistCheckedItem();
   }, []);
 
-
   return (
-    <div>
+    <>
+      {`${totalChecklistItem()}` == 0 ? (
+        <></>
+      ) : (
         <Chip
-                    sx={{mt:2}}
-                      icon={<CheckCircleOutlineIcon sx={{ mr: 1,height: 20  }} />}
-                      color="default"
-                      label="fdf"
-                    />
-     
-      {totalChecklistCheckedItem()} -  {totalChecklistItem()}
-    </div>
+          sx={{ mt: 2 }}
+          icon={<CheckCircleOutlineIcon sx={{ mr: 1, height: 20 }} />}
+          color={
+            `${totalChecklistCheckedItem()}` == `${totalChecklistItem()}`
+              ? "success"
+              : "default"
+          }
+          label={`${totalChecklistCheckedItem()} / ${totalChecklistItem()}`}
+        />
+      )}
+    </>
   );
 };
 
