@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCookie } from "../service/Api";
+import getCookies from "../service/getCookies";
+
+
 
 const initialState = {
-  isLogged: getCookie("token") ? true : false,
+  isLogged: getCookies('token') ? true : false,
 };
 
 const AuthSlice = createSlice({

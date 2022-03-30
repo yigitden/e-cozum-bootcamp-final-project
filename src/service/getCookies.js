@@ -1,0 +1,10 @@
+import React from "react";
+ 
+const getCookies = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+     
+}
+ 
+export default getCookies

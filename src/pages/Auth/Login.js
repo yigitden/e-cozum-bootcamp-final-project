@@ -2,10 +2,12 @@ import { TextField, Box } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useState } from "react";
 import Button from "../../components/Button";
-import  Api  from "../../service/Api";
+
 import { useCookies } from "react-cookie";
 import { useAppDispatch } from "../../store";
 import { setIsLogged } from "../../features/AuthSlice"; 
+import Api from "../../service/Api";
+
 
 const Login = () => {
   const [loginFormData, setLoginFormData] = useState({});
@@ -18,9 +20,10 @@ const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['token', 'username']);
   const dispatch = useAppDispatch();
 
-  const handleLogin = () => {
+  const handleLogin =  () => {
+    
     Api()
-      .post(`auth/login`, loginFormData)
+      .post("auth/login", loginFormData)
       .then((response) => {
         setCookie('token', response.data.token, { path: '/' });
         setCookie('username', response.data.username, { path: '/' });
