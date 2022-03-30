@@ -5,6 +5,7 @@ import ListSlice from "../features/ListSlice";
 import CardSlice from "../features/CardSlice";
 import UserSlice from "../features/UserSlice";
 import BoardSliceFromId from "../features/BoardSliceFromId";
+import AuthSlice from "../features/AuthSlice";
 
 
 
@@ -14,7 +15,8 @@ const store = configureStore ({
         list : ListSlice,
         card : CardSlice,
         user : UserSlice,
-        BoardSliceFromId : BoardSliceFromId
+        BoardSliceFromId : BoardSliceFromId,
+        auth : AuthSlice
     }
 })
 
