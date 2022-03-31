@@ -79,7 +79,7 @@ yarn run test
 
 ## Login Page
 
-![Login Page](previewws/loginpage.png)
+![Login Page](previews/loginpage.png)
 
 ## Home Page
 
