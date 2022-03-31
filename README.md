@@ -83,11 +83,11 @@ yarn run test
 
 ## Home Page
 
-![Home Page](previews/homepage.png)
+![Home Page](previews/homepage1.png)
 
 ## List Page
 
-![List Page](previews/listpage.png)
+![List Page](previews/Listpage.png)
 
 ## Board Page
 
@@ -96,7 +96,7 @@ yarn run test
 
 ##  Card Page
 
-![Card Page](previews/CARDS.PNG)
+![Card Page](previews/CARDS.png)
 ![Card Page](previews/cardpage.png)
 ![Card Page](previews/CHECKLIST.png)
 ![Card Page](previews/COMMENTPAGE.png)
